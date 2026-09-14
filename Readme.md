@@ -3,14 +3,14 @@
   # 📈 Deep Learning for Stock Price Movement Prediction
   
   **A modular repository containing multiple experiments in feature engineering, specific LSTM-based model architectures and backtesting
-  and backtesting with Vectorbt.**
+  with Vectorbt.**
 
   [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](#)
   [![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=flat&logo=PyTorch&logoColor=white)](#)
   [![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=flat&logo=pandas&logoColor=white)](#)
   [![VectorBT](https://img.shields.io/badge/vectorbt-Backtesting-success.svg)](#)
 
-  <img src="http://googleusercontent.com/image_collection/image_retrieval/16368275447433671204" alt="Data Retrieval - PreProcessing - Model Training - Backtesting - Debugging" width="800"/>
+   Data Retrieval - PreProcessing - Model Training - Backtesting - Debugging
 
 </div>
 
@@ -59,10 +59,9 @@ In the following the key results are shown for predicting intraday stock price m
 
 The repository contains implementations of the following deep learning architectures:
 
-- [x] **SOTA Deep-Learning Models:** baseline models that are commonly used for this scenario.  
-Vanilla-LSTM, GRU, ....
-- [x] **Attention-based LSTM:**
-- [x] **Multi-Task Learning LSTM:**
+- [x] **SOTA Deep-Learning Models:** baseline models that are commonly used for this scenario (Vanilla-LSTM, GRU, GAT, ALSTM)
+- [x] **Attention-based LSTM**
+- [x] **Multi-Task Learning LSTM**
 
 ---
 
@@ -72,9 +71,9 @@ Vanilla-LSTM, GRU, ....
 ├── images/                     
 ├── experiments/
 │   ├── feature_engineering/            # see feature_engineering/README.md
-│       ├── papers/                     # containing relevant or implemented papers
 │       ├── experimentXX_*
 │   ├── model_architectures/            # see model_architectures/README.md
+│       ├── papers/                     # containing relevant or implemented papers
 │       ├── experimentXX_*              # containing the same structure as above
 │           ├── outputs/                # train test results
 │           ├── Dataset.py              # pre processing of train test samples
@@ -86,7 +85,7 @@ Vanilla-LSTM, GRU, ....
 │       ├── experimentXX_*
 │   └── trading_strategies/             # see trading_strategies/README.md
 │       ├── benchmark_models/           # SOTA baseline model code (no trained weights)
-│       ├── trained_models/             # trained weights, namespaced per feature set
+│       ├── trained_benchmark_models/   # trained weights, namespaced per feature set
 │       ├── experimentXX_*
 ├── utils/                        
 │   ├── experiment_utils.py             # train and test loop related util functions
