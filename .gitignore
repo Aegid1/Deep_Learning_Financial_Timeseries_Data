@@ -1,0 +1,11 @@
+data/
+prompt_engineering_beispiele/
+openai_config.yaml
+ta-lib/
+*.pth
+*.env
+experiments/trading_strategies/trained_benchmark_models/
+*.iml
+api/
+main.py
+.idea/

@@ -1,0 +1,10 @@
+### Experiment 29
+
+| seq_size | input_features                                                                            | input normalization                                                                                    | loss                     | optimizer                 | predicted quantity           | evaluation criteria                          |
+|:---------|:----------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------|:---------------------------|:----------------------------|:-------------------------------|:------------------------------------------------|
+| 23       | log-return, log-volume-change, RSI, MACD, VWAP, oil_price, eur_usd, EMA, time-of-day mask | min-max scaling for RSI/MACD/EMA/VWAP/log-volume-change/oil_price/eur_usd; log-return left unscaled; time-mask fed through a learned embedding | SmoothL1Loss (beta=4e-3) | AdamW + CosineAnnealingLR | next-period stock log-return | final_test_loss + percentage deviation; best-of-10 fresh initializations kept |
+
+- **Architecture (high-level):**
+Same MI-LSTM backbone as Experiments 27/28, extended so every one of the 7 per-feature LSTM streams also receives a learned embedding of the intraday time-slot (`nn.Embedding(5, 3)`, one of 5 categories) as extra input at each timestep, concatenated before the LSTM. This is a direct follow-up to [`experiment12_model_and_sampling_analysis`](../experiment12_model_and_sampling_analysis), which found that prediction error and direction accuracy vary systematically with time of day — this experiment gives the model that information explicitly instead of leaving it as an unmodeled bias.
+
+- **Results:** `results.csv` (10 fresh-initialization runs). Best `percentage deviation` ≈ **0.48** (hidden_size=50, lr=4e-3) — comparable in scale to Experiment 28's MSE runs since the loss function and target are the same.
