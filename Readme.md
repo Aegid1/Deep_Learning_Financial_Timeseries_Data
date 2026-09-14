@@ -73,7 +73,6 @@ The repository contains implementations of the following deep learning architect
 │   ├── feature_engineering/            # see feature_engineering/README.md
 │       ├── experimentXX_*
 │   ├── model_architectures/            # see model_architectures/README.md
-│       ├── papers/                     # containing relevant or implemented papers
 │       ├── experimentXX_*              # containing the same structure as above
 │           ├── outputs/                # train test results
 │           ├── Dataset.py              # pre processing of train test samples

@@ -9,3 +9,4 @@ experiments/trading_strategies/trained_benchmark_models/
 api/
 main.py
 .idea/
+*.pdf
