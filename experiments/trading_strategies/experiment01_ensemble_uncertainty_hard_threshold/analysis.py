@@ -1,10 +1,10 @@
 import math
-
 import numpy as np
 import seaborn
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
+
 
 def visualize_distribution_of_ensemble_predictions(input_path:str, output_path:str, model_names:list[str], pred_type:str):
     for model in model_names:
@@ -99,7 +99,7 @@ def visualize_distribution_of_actual_values(input_path:str, output_path:str):
 # visualize_distribution_of_ensemble_predictions(
 #     input_path='outputs',
 #     output_path=os.path.join("outputs", "analysis"),
-#     model_names=["ALSTM", "GAT", "GRU", "MILSTM"],
+#     model_names=["MILSTM_sample_reweighting_less_weight_decay"],
 #     pred_type="mean"
 # )
 

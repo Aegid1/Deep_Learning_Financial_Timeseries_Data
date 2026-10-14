@@ -1,0 +1,9 @@
+{
+    "best_value": 0.5094000000000001,
+    "best_params": {
+        "lr": 0.0005111011092374247,
+        "hidden_size": 32,
+        "num_layers": 3,
+        "weight_decay": 3.8604419474438507e-05
+    }
+}

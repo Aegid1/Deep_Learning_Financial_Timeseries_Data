@@ -231,6 +231,23 @@ def add_ohcl_technical_indicators(company_names:list[str], path:str):
     clean_technical_indicators(company_names, ["ADOSC", "CCI", "WILL_R", "STOCH_D", "STOCH_K", "UpperBand", "MiddleBand", "LowerBand", "RSI", "EMA", "MACD", "MACDSignal", "MACDHist", "OBV", "VWAP"], path)
 
 
+# calculates technical indicators relative to the price/volatility at the given timestep
+def add_relative_technical_indicators(company_names:list[str], path:str):
+    for company in company_names:
+        company_path = os.path.join(path, company + ".csv")
+        df_stock_data = pd.read_csv(company_path)
+
+        df_stock_data["VWAP_p"] = df_stock_data["VWAP"] / df_stock_data["Open"] # VWAP relative to OPEN price
+        df_stock_data["EMA_p"] = df_stock_data["EMA"] / df_stock_data["Open"] # EMA relative to OPEN price
+
+        df_stock_data.to_csv(company_path, index=False)
+
+
+# add_relative_technical_indicators(
+#     company_names=["Airbus", "Allianz", "BMW", "Deutsche Bank", "Deutsche Telekom", "Mercedes-Benz", "Porsche", "SAP", "Siemens", "Siemens Healthineers", "Volkswagen"],
+#     path=os.path.join("..", "data", "stocks_test_data_benchmark")
+# )
+
 # add_moving_average_convergence_divergence(["BMW"], 14, 26, 9)
 
 # clean_technical_indicators(

@@ -18,7 +18,8 @@ trading at all, and how they compare to standard baseline architectures on the s
   `[0, w_max=1.0]`. A position is fully closed (`sell_signal`) whenever the expected return drops
   to `<= -0.3%`. This intentionally simple design was the point of this experiment: if it can't
   already beat a passive benchmark with the current models, more elaborate strategy logic is not
-  worth building yet.
+  worth building yet. It is not really expected that this approach already works with the currently available models
+  because these are not trained to predict the stock movement direction.
 - **Data:** 11 DAX stocks, test period only (`benchmark_models(stocks_to_benchmark=[...])`), see
   `outputs/<MODEL>/<MODEL>_<Ticker>_preds.csv` for the per-timestep ensemble mean/std, and
   `outputs/analysis/actual_returns.png` for the true return distribution over the same period.
@@ -28,7 +29,7 @@ trading at all, and how they compare to standard baseline architectures on the s
 The reason becomes clear when looking at the raw predictions
 (`outputs/analysis/MILSTM_ensemble_preds_mean.png` vs. `outputs/analysis/actual_returns.png`)
 
-Actual test-set returns, spread over roughly **±5-8%** per 2h window across all 11
+Actual test-set returns, spread over roughly **+/- 5-8%** per 2h window across all 11
 stocks (see `outputs/analysis/actual_returns.png`), with real heavy-tail outliers. 
 
 MILSTM's predictions is far away from this: across 5016 predictions on the test set, the largest 

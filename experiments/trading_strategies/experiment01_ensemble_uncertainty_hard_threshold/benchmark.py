@@ -79,7 +79,8 @@ FEATURE_SET_NAME = "stationary_volume_new"  # must match the feature_set_name on
 
 benchmark_models(
     # models = ["ALSTM", "GRU", "GAT"],
-    models = ["MILSTM"],
+    # models = ["MILSTM_sample_reweighting_less_weight_decay"],
+    models = ["ALSTM"],
     models_path=os.path.join("..", "trained_benchmark_models", FEATURE_SET_NAME),
     test_data_path=os.path.join("..", "..", "..", "data", "stocks_test_data_benchmark"),
     stocks_to_benchmark=[

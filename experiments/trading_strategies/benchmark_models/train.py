@@ -2,6 +2,7 @@ import os
 import torch
 from rich.console import Console
 from torch import nn
+from torch.nn import MSELoss
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from torch.utils.data import Dataset
 import utils.experiment_utils as utils
@@ -40,11 +41,11 @@ def train(
 
     params = sum(p.numel() for p in model.parameters() if p.requires_grad) # calculates total amount of params
 
-    optimizer = torch.optim.AdamW(model.parameters(), initial_learning_rate, weight_decay=1e-2)
+    optimizer = torch.optim.AdamW(model.parameters(), initial_learning_rate, weight_decay=1e-4)
     dynamic_eta_min = initial_learning_rate * 0.05
     scheduler = CosineAnnealingLR(optimizer, T_max=epochs, eta_min=dynamic_eta_min)
-    criterion =  nn.SmoothL1Loss(beta=3.5e-3)
-
+    # criterion =  nn.SmoothL1Loss(beta=3.5e-3)
+    criterion = MSELoss()
     train_loader, test_loader = utils.create_train_test_split(dataset, maximal_batch_size)
     final_train_loss, final_test_loss, final_percentage_devation_new, duration, model = utils.train_model(
         model, epochs, criterion, optimizer, train_loader, test_loader, scheduler
@@ -60,23 +61,23 @@ def train(
     result_df.to_csv(os.path.join(path, "results.csv"), index=False)
 
 
-# for i in range(10):
-#     current_model_params = {
-#         "d_feat": 7,
-#         "hidden_size": 32,
-#         "num_layers": 4,
-#         "dropout": 0.2
-#     }
-#     train(
-#         maximal_batch_size=32,
-#         model_params=current_model_params,
-#         initial_learning_rate=1e-3,
-#         epochs=100,
-#         model_name="ALSTM",
-#         model=ALSTMModel(**current_model_params),
-#         feature_set_name="stationary_volume_new",
-#         dataset=TechnicalIndicatorsDataSetFeaturesSplit(
-#             23,
-#             os.path.join("..", '..', '..', 'data', 'samples', 'train_samples', "stationary_volume_new")
-#         )
-#     )
+for i in range(10):
+    current_model_params = {
+        "d_feat": 7,
+        "hidden_size": 32,
+        "num_layers": 4,
+        "dropout": 0.2
+    }
+    train(
+        maximal_batch_size=32,
+        model_params=current_model_params,
+        initial_learning_rate=1e-3,
+        epochs=100,
+        model_name="ALSTM",
+        model=ALSTMModel(**current_model_params),
+        feature_set_name="stationary_volume_new",
+        dataset=TechnicalIndicatorsDataSetFeaturesSplit(
+            23,
+            os.path.join("..", '..', '..', 'data', 'samples', 'train_samples', "stationary_volume_new")
+        )
+    )

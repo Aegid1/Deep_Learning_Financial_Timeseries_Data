@@ -7,6 +7,8 @@ from benchmark_models.Localformer.Localformer import Transformer as Localformer
 from benchmark_models.TCN.TCN import TCNModel
 from benchmark_models.Transformer.Transformer import Transformer
 from experiments.model_architectures.experiment30_smooth_l1_loss.Model import ModelLessLSTMs as MILSTM
+from experiments.model_architectures.experiment35_fat_tails_loss.exponential_weights.Model import ModelLessLSTMs as MILSTM_sample_reweighting
+from experiments.model_architectures.experiment35_fat_tails_loss.tercile_weights.Model import ModelLessLSTMs as MILSTM_sample_reweighting_tercile
 
 class EnsembleWrapper:
     def __init__(self, model_paths: list[str], model_class:str, top_k_models:int=5):
@@ -23,13 +25,15 @@ class EnsembleWrapper:
             "Localformer": lambda: Localformer(d_feat=7, d_model=32, nhead=8, num_layers=6, dropout=0.0),
             "TCN": lambda: TCNModel,
             "Transformer": lambda: Transformer(d_feat=7, d_model=64, nhead=2, num_layers=3, dropout=0.0),
-            "MILSTM": lambda: MILSTM(hidden_size=40)
+            "MILSTM": lambda: MILSTM(hidden_size=40),
+            "MILSTM_sample_reweighting": lambda: MILSTM_sample_reweighting(hidden_size=40), #TODO delete later
+            "MILSTM_sample_reweighting_tercile": lambda: MILSTM_sample_reweighting_tercile(hidden_size=40), #TODO delete later
+            "MILSTM_sample_reweighting_less_weight_decay": lambda: MILSTM_sample_reweighting_tercile(hidden_size=40)
         }
 
         # paths are sorted, because their name show the error of the model -> models are sorted ascending
         # thus best models are the first of the sorted list
         paths = sorted(model_paths)
-        print(paths)
         for i in range(min(top_k_models, len(paths))): # min handles the case for having less than top_k_models
             # call the lambda function to create the model and load the params
             model = class_dict[model_class]()

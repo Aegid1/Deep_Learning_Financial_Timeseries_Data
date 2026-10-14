@@ -267,6 +267,12 @@ company_names = ["BMW", "Airbus", "Allianz", "Deutsche Bank", "Deutsche Telekom"
 #     ['Datetime', 'Open', "High", "Low", "Close", 'Volume', 'Year', 'Week']
 # )
 
+# fix_timezones_of_stock_data(
+#     company_names=["BMW", "Airbus", "Allianz", "Deutsche Bank", "Deutsche Telekom",
+#                    "Mercedes-Benz", "Porsche", "Siemens", "SAP", "Siemens Healthineers", "Volkswagen"],
+#     path=os.path.join("..", "data", "stocks_stationary_volume")
+# )
+
 # create_pickle_samples_all_data (
 #         ["BMW", "Airbus", "Allianz", "Deutsche Bank", "Deutsche Telekom", "Mercedes-Benz", "Porsche", "Siemens", "SAP", "Siemens Healthineers", "Volkswagen"],
 #     23,

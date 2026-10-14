@@ -89,6 +89,7 @@ def simulate_single_model(
     prices = prices.iloc[sequence_size:]
     sigma_mkt = sigma_mkt.iloc[sequence_size:]
 
+    #TODO add the current weights parameter for the trading strategy and make it conform with the new logic
     target_weights = trading_strategy(sigma_mkt, sigma_ens, predictions, costs)
 
     # size_type='targetpercent' tells VBT, that the numbers should be interpreted as percent
