@@ -7,7 +7,7 @@ from torch.utils.data import Dataset
 import pickle
 
 def scale_inputs_and_labels(item):
-    relevant_features_lstms = ["rsi", "macd", "vwap", "log_volume_change"]
+    relevant_features_lstms = ["rsi", "macd", "vwap", "log_volume_change", "ema"]
 
     stock_log_return = np.array(item['features']["log_return"]).reshape(-1, 1)
     stock_log_return_tensor = torch.tensor(stock_log_return, dtype=torch.float32)
@@ -15,11 +15,7 @@ def scale_inputs_and_labels(item):
     time_mask = np.array(item['features']["time_mask"]).reshape(-1, 1)
     time_mask_tensor = torch.tensor(time_mask, dtype=torch.float32)
 
-    # TODO: warum ist das nicht normalisiert?
-    ema = np.array(item['features']["ema"]) # ema is not processed through lstm and thus is handled differently
-    ema_tensor = torch.tensor(ema, dtype=torch.float32).unsqueeze(-1)
-
-    features = { "log_return": stock_log_return_tensor, "time_mask": time_mask_tensor, "ema": ema_tensor }
+    features = { "log_return": stock_log_return_tensor, "time_mask": time_mask_tensor }
 
     for key in item["features"].keys():
         if key in relevant_features_lstms:

@@ -73,7 +73,7 @@ class ModelLessLSTMs(nn.Module):
             list_tilde[3],
             list_tilde[4]
         ) # milstm_tilde [50, 25, 200]
-        #TODO test afterwards with this norm-layer disabled
+
         milstm_out = self.milstm_norm(milstm_tilde)
         milstm_out = self.dropout(torch.relu(milstm_out))
 
@@ -88,7 +88,7 @@ class ModelLessLSTMs(nn.Module):
         dnn_2 = self.ema_dnn_layer(features_not_lstms[0].squeeze(-1))
         if dnn_2.dim() == 1: # batch_size is 1 and was removed in previous step
             dnn_2 = dnn_2.unsqueeze(0)
-        #TODO test afterwards with this layer enabled
+
         #out_dnn1 = self.DNN_Layer(torch.tanh(milstm_tilde))
 
         combined_output = torch.cat([

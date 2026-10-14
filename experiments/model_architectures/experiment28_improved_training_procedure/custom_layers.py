@@ -85,7 +85,6 @@ class MultiInputLSTMLessLSTMs(nn.Module):
 
         self.init_weights()
 
-    #TODO check the initialization and maybe revert it to uniform initialization
     def init_weights(self):
         for name, param in self.named_parameters():
             if name.startswith('W_'): # Input-to-Hidden weights

@@ -29,7 +29,6 @@ class ModelLessLSTMs(nn.Module):
 
 
     def init_weights(self):
-        #TODO eventuell wieder eine uniform initialisierung verwenden
         for m in self.modules():
             if isinstance(m, nn.Linear):
                 nn.init.kaiming_uniform_(m.weight, nonlinearity='relu')

@@ -16,7 +16,7 @@ def train(maximal_batch_size:int, hidden_size:int, initial_learning_rate:float, 
 
     final_percentage_devation = np.inf
     for i in range(10):
-        model = Model(input_size=1, hidden_size=hidden_size) #TODO ist die input_size so korrekt und für was ist die nochmal?
+        model = Model(input_size=1, hidden_size=hidden_size)
         params = sum(p.numel() for p in model.parameters() if p.requires_grad) # calculates total amount of params
         optimizer = torch.optim.AdamW(model.parameters(), initial_learning_rate, weight_decay=1e-2)
         scheduler = CosineAnnealingLR(optimizer, T_max=epochs, eta_min=1e-6)

@@ -17,7 +17,7 @@ class ModelLessLSTMs(nn.Module):
         # stock_price, volume, rsi, macd, vwap, oil_change, currency_change
         for i in range(7):
             self.layers_lstms.append(nn.LSTM(input_size=input_size, hidden_size=hidden_size, num_layers=1))
-            self.norm_layers.append(nn.LayerNorm(hidden_size)) #TODO was macht eine layer norm
+            self.norm_layers.append(nn.LayerNorm(hidden_size))
 
         self.MI_LSTM_layer = MILSTM_Less_LSTMs(hidden_size, hidden_size)
         self.dropout = nn.Dropout(p=0.1)

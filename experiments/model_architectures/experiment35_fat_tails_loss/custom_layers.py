@@ -87,7 +87,6 @@ class MultiInputLSTMLessLSTMs(nn.Module):
         self.b_f = nn.Parameter(torch.Tensor(hidden_sz))
         self.init_weights()
 
-    #TODO check the initialization and maybe revert it to uniform initialization
     def init_weights(self):
         stdv = 1.0 / math.sqrt(self.hidden_size)
         for weight in self.parameters():
